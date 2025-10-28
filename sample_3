@@ -1,0 +1,146 @@
+#include <TM1638.h>
+
+#include <MAX7219plus.h>
+#include <TM1637plus.h>
+#include <TM1638plus.h>
+#include <TM1638plus_Model2.h>
+#include <TM1638plus_Model3.h>
+#include <TM1638plus_common.h>
+#include <seven_segment_font_data.h>
+
+/*!
+	@file     TM1638plus_HELLOWORLD_Model2.ino
+	@author   Gavin Lyons
+	@brief 
+		A Basic test file for model 2, TM1638 module(16 KEY 16 pushbuttons).
+		Carries out series most basic test , "hello world" helo wrld
+*/
+
+#include <TM1638plus_Model2.h>
+
+// GPIO I/O pins on the Arduino connected to strobe, clock, data, pick on any I/O pin you want.
+#define  STROBE_TM2 6 
+#define  STROBE_TM1 5
+#define  STROBE_TM 4 // strobe = GPIO connected to strobe line of module
+#define  CLOCK_TM 3  // clock = GPIO connected to clock line of module
+#define  DIO_TM 2 // data = GPIO connected to data line of module
+bool swap_nibbles = false; //Default is false if left out, see issues section in readme at URL
+bool high_freq = false; //default false, If using a high freq CPU > ~100 MHZ set to true. 
+
+// Constructor object Init the module
+TM1638plus_Model2 tm(STROBE_TM, CLOCK_TM , DIO_TM, swap_nibbles, high_freq);
+TM1638plus_Model2 tm1(STROBE_TM1, CLOCK_TM , DIO_TM, swap_nibbles, high_freq);
+TM1638plus_Model2 tm2(STROBE_TM2, CLOCK_TM , DIO_TM, swap_nibbles, high_freq);
+
+void Display_1(uint8_t segment_value);
+void Display_2(uint8_t segment_value);
+void Display_3(uint8_t segment_value);
+void Display_4(uint8_t segment_value);
+void Display_5(uint8_t segment_value);
+void Display_6(uint8_t segment_value);
+void Display_7(uint8_t segment_value);
+void Display_8(uint8_t segment_value);
+void Display_9(uint8_t segment_value);
+void Display_0(uint8_t segment_value);
+void Display_dot(uint8_t segment_value);
+
+void Display_1(uint8_t segment_value)
+{
+  	tm.DisplaySegments(2,segment_value);
+    tm.DisplaySegments(1,segment_value);  
+}
+
+void Display_2(uint8_t segment_value)
+{
+  tm.DisplaySegments(8,segment_value); 
+  tm.DisplaySegments(1,segment_value);
+	tm.DisplaySegments(6,segment_value);
+  tm.DisplaySegments(4,segment_value); 
+  tm.DisplaySegments(3,segment_value);
+}
+
+void Display_3(uint8_t segment_value)
+{
+  tm.DisplaySegments(8,segment_value); 
+  tm.DisplaySegments(1,segment_value);
+	tm.DisplaySegments(6,segment_value);
+  tm.DisplaySegments(2,segment_value); 
+  tm.DisplaySegments(3,segment_value);
+}
+
+void Display_4(uint8_t segment_value)
+{
+  tm.DisplaySegments(5,segment_value); 
+  tm.DisplaySegments(6,segment_value);
+	tm.DisplaySegments(1,segment_value);
+  tm.DisplaySegments(2,segment_value); 
+}
+
+void Display_5(uint8_t segment_value)
+{
+  tm.DisplaySegments(8,segment_value); 
+  tm.DisplaySegments(5,segment_value);
+	tm.DisplaySegments(6,segment_value);
+  tm.DisplaySegments(2,segment_value); 
+  tm.DisplaySegments(3,segment_value);
+}
+
+void Display_6(uint8_t segment_value)
+{
+  tm.DisplaySegments(8,segment_value); 
+  tm.DisplaySegments(5,segment_value);
+	tm.DisplaySegments(4,segment_value);
+  tm.DisplaySegments(3,segment_value); 
+  tm.DisplaySegments(2,segment_value);
+	tm.DisplaySegments(6,segment_value);
+}
+
+void Display_7(uint8_t segment_value)
+{
+  tm.DisplaySegments(2,segment_value); 
+  tm.DisplaySegments(1,segment_value);
+	tm.DisplaySegments(8,segment_value);
+}
+
+void Display_8(uint8_t segment_value)
+{
+  tm.DisplaySegments(1,segment_value); 
+  tm.DisplaySegments(2,segment_value);
+	tm.DisplaySegments(3,segment_value);
+  tm.DisplaySegments(4,segment_value); 
+  tm.DisplaySegments(5,segment_value);
+	tm.DisplaySegments(6,segment_value);
+  tm.DisplaySegments(8,segment_value);
+}
+
+void Display_9(uint8_t segment_value)
+{
+  tm.DisplaySegments(8,segment_value); 
+  tm.DisplaySegments(5,segment_value);
+	tm.DisplaySegments(6,segment_value);
+  tm.DisplaySegments(1,segment_value); 
+  tm.DisplaySegments(2,segment_value);
+	tm.DisplaySegments(3,segment_value);
+}
+
+void setup() {
+	Serial.begin(9600);
+ tm.displayBegin();
+ tm1.displayBegin();
+ tm2.displayBegin();
+}
+
+void loop() 
+{
+	  /*
+    Display_9(8);
+    delayMicroseconds(10); 
+    Display_8(4);
+    delayMicroseconds(10); 
+    Display_7(2);
+    delayMicroseconds(10);
+    */ 
+    Display_6(16);
+    delayMicroseconds(10); 
+}
+   
